@@ -1,0 +1,39 @@
+File Attributes [C#]
+This example shows how to get or set file attributes, how to add attributes and how to remove attributes from current ones.
+
+Get file attributes
+To get file attributes use static method File.GetAttri­butes. The method returns FileAttributes which is a bitwise combination of file attribute flags.
+
+[C#]
+string filePath = @"c:\test.txt";
+
+// get file attributes
+FileAttributes fileAttributes = File.GetAttributes(filePath);
+
+Set file attributes
+To set file attributes use static method File.SetAttri­butes. Parameter of the method is a bitwise combination of FileAttributes enumeration.
+
+[C#]
+// clear all file attributes
+File.SetAttributes(filePath, FileAttributes.Normal);
+
+// set just only archive and read only attributes (no other attribute will set)
+File.SetAttributes(filePath, FileAttributes.Archive |
+                             FileAttributes.ReadOnly);
+
+Check whether a file has any attribute
+To check whether a file has any attribute (readonly, hidden) get current file attributes first and use bitwise AND (&) operator with a mask of specific attributes.
+
+[C#]
+// check whether a file is read only
+bool isReadOnly = ((File.GetAttributes(filePath) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly);
+
+// check whether a file is hidden
+bool isHidden = ((File.GetAttributes(filePath) & FileAttributes.Hidden) == FileAttributes.Hidden);
+
+// check whether a file has archive attribute
+bool isArchive = ((File.GetAttributes(filePath) & FileAttributes.Archive) == FileAttributes.Archive);
+
+// check whether a file is system file
+bool isSystem = ((File.GetAttributes(filePath) & FileAttributes.System) == FileAttributes.System);
+
